@@ -1,0 +1,398 @@
+CREATE TABLE Client
+(
+	Nomer_Clienta        INTEGER NOT NULL ,
+	FIO_Clienta          TEXT NULL ,
+	Telephone_Clienta    TEXT NULL 
+);
+
+
+CREATE TABLE Conditerskie_izdelia
+(
+	Number_productii     INTEGER NOT NULL ,
+	Osnova               TEXT NULL ,
+	Nachinka             TEXT NULL ,
+	Name_izdelia         TEXT NULL ,
+	Srok_Godnosti        DATE NULL ,
+	Date_izgotovlenia    DATE NULL ,
+	ID_Confectioner      INTEGER NOT NULL ,
+	ID_Confectionery     INTEGER NOT NULL 
+);
+
+
+
+
+CREATE TABLE Confectioner
+(
+	ID_Confectioner      INTEGER NOT NULL ,
+	ID_Confectionery     INTEGER NOT NULL ,
+	FIO_Confectioner     TEXT NULL ,
+	Qualification        TEXT NULL 
+);
+
+
+
+
+CREATE TABLE Confectionery
+(
+	ID_Confectionery     INTEGER NOT NULL ,
+	Name_Conditerskaya   TEXT NULL ,
+	Address_Conditersoy  TEXT NULL 
+);
+
+
+
+
+CREATE TABLE Manager
+(
+	ID_Manager           INTEGER NOT NULL ,
+	FIO_Maneger          TEXT NULL ,
+	ID_Confectionery     INTEGER NULL 
+);
+
+
+
+
+
+CREATE TABLE Menu
+(
+	Nomer_menu           INTEGER NOT NULL ,
+	Cena_productii       INTEGER NULL ,
+	Vremya_prigotovlenia DATE NULL ,
+	Nazvania_produkcii   TEXT NULL 
+);
+
+
+
+CREATE TABLE Zakaz
+(
+	Nomer_zakaza         INTEGER NOT NULL ,
+	Date_zakaza          DATE NULL ,
+	Summa_zakaza         INTEGER NULL ,
+	Date_vipolneniya_zakaza DATE NULL ,
+	Nomer_menu           INTEGER NOT NULL ,
+	Nomer_Clienta        INTEGER NOT NULL ,
+	ID_Manager           INTEGER NOT NULL ,
+	Number_productii     INTEGER NOT NULL ,
+	ID_Confectioner      INTEGER NOT NULL ,
+	ID_Confectionery     INTEGER NOT NULL 
+);
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Кондитерская
+INSERT INTO confectionery VALUES ('1', 'Кондитерская Покровка', 'г. Москва, ул. Покровка, 27'), 
+('2', 'Кондитерская Арбат', 'г. Москва, ул. Новый Арбат, 13'),
+('3', 'Кондитерская Тверская', 'г. Москва, ул. Тверская, 17'),
+('4', 'Кондитерская Мытная ', 'г. Москва, ул. Мытная, 52');
+
+
+Клиент
+INSERT INTO client VALUES ('1', 'Крылов Роман Сергеевич', '79619973223'), 
+('2', 'Белова Ирина Николаевна', '79003459076'),
+('3', 'Тигрова Виктория Владимировна', '79613241578'),
+('4', 'Баранов Ярослав Савельевич', '79858705570');
+
+Кондитерские изделья
+INSERT INTO Conditerskie_izdelia VALUES 
+('1', 'Тесто', 'Клубничное варенье', 'Клубничная булочка', '5 дней' ,  '1' ,  '1'), 
+('2', 'Диетическое тесто', 'Творог', 'Диетическая булочка с творогом',  '5 дней' ,  '2' ,  '2'),
+('3', 'Коржи', 'Сахарный яичный крем', 'Бисквитный торт',  '10 дней' ,  '3' ,  '3'),
+('4', 'Тесто', 'Шоколад', ' Шоколоданый эклер' ,  '7 дней' ,  '4' ,  '4'),
+('5', 'Тесто', 'Нет', 'Вафли',  '5 дней', '1' ,  '1');
+
+
+Кондитер
+INSERT INTO Confectioner VALUES 
+('1', '1', 'Власов Михаил Григорьевич', 'Повар, Кондитер, Старший Кондитер'), 
+('2', '2', 'Голиков Фёдор Юрьевич', 'Повар, Кондитер'),
+('3', '3', 'Майорова Елизавета Александровна', 'Повар, Кондитер'),
+('4', '4', 'Мельников Никита Глебович', 'Повар, Кондитер');
+
+Меню 
+INSERT INTO Menu VALUES 
+('1', '1000', '02:00:00', 'Корзинка с клубничными булочками'), 
+('2', '700', '02:00:00', 'Корзинка с диетическими булочками'),
+('3', '1000', '01:00:00', 'Бисквитный тортик'),
+('4', '700', '01:20:00', 'Коробочка эклеров'),
+('5', '200', '00:20:00', 'Свежая вафля');
+
+
+Менеджер
+INSERT INTO manager VALUES
+('1', 'Лопатина Виктория Михайловна', '1'), 
+('2', 'Никитин Кирилл Филиппович', '2'),
+('3', 'Новикова Елизавета Фёдоровна', '3'),
+('4', 'Зубкова Дарья Александровна', '4');
+
+Заказ
+INSERT INTO Zakaz VALUES 
+('1', '2023-01-05', '1000', '2023-01-06', '1' ,  '1' ,  '1' , '1' ,  '1' ,  '1'), 
+('2', '2022-11-23', '1000', '2022-11-25',  '2' ,  '2' ,  '2' , '2' ,  '2' ,  '2'),
+('3', '2022-11-25', '700', '2022-11-26',  '3' ,  '3' ,  '3' , '3' ,  '3' ,  '3'),
+('4', '2022-11-25', '1000', '2022-11-26' ,  '4' ,  '4' ,  '4' , '4' ,  '4' ,  '4');
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema Konditerskaya
+-- -----------------------------------------------------
+-- 
+-- 
+
+-- -----------------------------------------------------
+-- Schema Konditerskaya
+--
+-- 
+-- 
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Konditerskaya` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+USE `Konditerskaya` ;
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Кондитерская`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Кондитерская` (
+  `id_Кондитерской` INT NOT NULL,
+  `Название_Кондитерской` VARCHAR(45) NULL,
+  `Адресс_Кондитерской` VARCHAR(90) NULL,
+  `Кондитерскаяcol` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_Кондитерской`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Кондитер`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Кондитер` (
+  `id_Кондитера` INT NOT NULL,
+  `ФИО_Кондитера` VARCHAR(60) NULL,
+  `Квалификация` VARCHAR(45) NULL,
+  `Кондитерская_id_Кондитерской` INT NOT NULL,
+  PRIMARY KEY (`id_Кондитера`, `Кондитерская_id_Кондитерской`),
+  INDEX `fk_Кондитер_Кондитерская_idx` (`Кондитерская_id_Кондитерской` ASC) VISIBLE,
+  CONSTRAINT `fk_Кондитер_Кондитерская`
+    FOREIGN KEY (`Кондитерская_id_Кондитерской`)
+    REFERENCES `Konditerskaya`.`Кондитерская` (`id_Кондитерской`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Кондитерские_изделия`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Кондитерские_изделия` (
+  `id_Кондитерских_изделий` INT NOT NULL,
+  `Основа` VARCHAR(45) NULL,
+  `Начинка` VARCHAR(45) NULL,
+  `Название_изделия` VARCHAR(45) NULL,
+  `Срок_годности` VARCHAR(45) NULL,
+  `Кондитер_id_Кондитера` INT NOT NULL,
+  `Кондитер_Кондитерская_id_Кондитерской` INT NOT NULL,
+  PRIMARY KEY (`id_Кондитерских_изделий`, `Кондитер_id_Кондитера`, `Кондитер_Кондитерская_id_Кондитерской`),
+  INDEX `fk_Кондитерские_изделия_Кондитер_idx` (`Кондитер_id_Кондитера` ASC, `Кондитер_Кондитерская_id_Кондитерской` ASC) VISIBLE,
+  CONSTRAINT `fk_Кондитерские_изделия_Кондитер1`
+    FOREIGN KEY (`Кондитер_id_Кондитера` , `Кондитер_Кондитерская_id_Кондитерской`)
+    REFERENCES `Konditerskaya`.`Кондитер` (`id_Кондитера` , `Кондитерская_id_Кондитерской`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Менеджер`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Менеджер` (
+  `id_Менеджера` INT NOT NULL,
+  `ФИО_Менеджера` VARCHAR(60) NULL,
+  `Кондитерская_id_Кондитерской` INT NOT NULL,
+  PRIMARY KEY (`id_Менеджера`),
+  INDEX `fk_Менеджер_Кондитерская1_idx` (`Кондитерская_id_Кондитерской` ASC) VISIBLE,
+  CONSTRAINT `fk_Менеджер_Кондитерская1`
+    FOREIGN KEY (`Кондитерская_id_Кондитерской`)
+    REFERENCES `Konditerskaya`.`Кондитерская` (`id_Кондитерской`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Клиент`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Клиент` (
+  `id_Клиента` INT NOT NULL,
+  `ФИО_Клиента` VARCHAR(45) NULL,
+  `Номер_телефона_клиента` VARCHAR(11) NULL,
+  PRIMARY KEY (`id_Клиента`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Меню`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Меню` (
+  `id_Меню` INT NOT NULL,
+  `Цена_продукции` INT NULL,
+  `Менюcol` VARCHAR(45) NULL,
+  `Время_приготовления` TIME NULL,
+  `Название_продукции` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_Меню`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Konditerskaya`.`Заказ`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Konditerskaya`.`Заказ` (
+  `Номер_заказа` INT NOT NULL,
+  `Дата_заказа` DATE NULL,
+  `Сумма_заказа` INT NULL,
+  `Менеджер_id_Менеджера` INT NOT NULL,
+  `Кондитерские_изделия_id_Кондитерских_изделий` INT NOT NULL,
+  `Клиент_id_Клиента` INT NOT NULL,
+  `Меню_id_Меню` INT NOT NULL,
+  PRIMARY KEY (`Номер_заказа`, `Менеджер_id_Менеджера`, `Кондитерские_изделия_id_Кондитерских_изделий`, `Клиент_id_Клиента`, `Меню_id_Меню`),
+  INDEX `fk_Заказ_Менеджер1_idx` (`Менеджер_id_Менеджера` ASC) VISIBLE,
+  INDEX `fk_Заказ_Кондитерские_изделия1_idx` (`Кондитерские_изделия_id_Кондитерских_изделий` ASC) VISIBLE,
+  INDEX `fk_Заказ_Клиент1_idx` (`Клиент_id_Клиента` ASC) VISIBLE,
+  INDEX `fk_Заказ_Меню1_idx` (`Меню_id_Меню` ASC) VISIBLE,
+  CONSTRAINT `fk_Заказ_Менеджер1`
+    FOREIGN KEY (`Менеджер_id_Менеджера`)
+    REFERENCES `Konditerskaya`.`Менеджер` (`id_Менеджера`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Заказ_Кондитерские_изделия1`
+    FOREIGN KEY (`Кондитерские_изделия_id_Кондитерских_изделий`)
+    REFERENCES `Konditerskaya`.`Кондитерские_изделия` (`id_Кондитерских_изделий`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Заказ_Клиент1`
+    FOREIGN KEY (`Клиент_id_Клиента`)
+    REFERENCES `Konditerskaya`.`Клиент` (`id_Клиента`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Заказ_Меню1`
+    FOREIGN KEY (`Меню_id_Меню`)
+    REFERENCES `Konditerskaya`.`Меню` (`id_Меню`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+---------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO кондитерская (id_Кондитерской, Название_Кондитерской, Адресс_Кондитерской)
+VALUES ('1', 'Кондитерская Покровка', 'г. Москва, ул. Покровка, 27'), 
+('2', 'Кондитерская Арбат', 'г. Москва, ул. Новый Арбат, 13'),
+('3', 'Кондитерская Тверская', 'г. Москва, ул. Тверская, 17'),
+('4', 'Кондитерская Мытная ', 'г. Москва, ул. Мытная, 52');
+
+
+
+INSERT INTO клиент VALUES ('1', 'Крылов Роман Сергеевич', '79619973223'), 
+('2', 'Белова Ирина Николаевна', '79003459076'),
+('3', 'Тигрова Виктория Владимировна', '79613241578'),
+('4', 'Баранов Ярослав Савельевич', '79858705570');
+
+
+
+INSERT INTO кондитер (id_Кондитера, Кондитерская_id_Кондитерской, ФИО_Кондитера, Квалификация)
+VALUES 
+('1', '1', 'Власов Михаил Григорьевич', 'Повар, Кондитер, Старший Кондитер'), 
+('2', '2', 'Голиков Фёдор Юрьевич', 'Повар, Кондитер'),
+('3', '3', 'Майорова Елизавета Александровна', 'Повар, Кондитер'),
+('4', '4', 'Мельников Никита Глебович', 'Повар, Кондитер');
+
+
+INSERT INTO меню (id_Меню, Цена_продукции, Время_приготовления, Название_продукции)
+VALUES 
+('1', '1000', '02:00:00', 'Корзинка с клубничными булочками'), 
+('2', '700', '02:00:00', 'Корзинка с диетическими булочками'),
+('3', '1000', '01:00:00', 'Бисквитный тортик'),
+('4', '700', '01:20:00', 'Коробочка эклеров'),
+('5', '200', '00:20:00', 'Свежая вафля');
+
+INSERT INTO менеджер VALUES
+('1', 'Лопатина Виктория Михайловна', '1'), 
+('2', 'Никитин Кирилл Филиппович', '2'),
+('3', 'Новикова Елизавета Фёдоровна', '3'),
+('4', 'Зубкова Дарья Александровна', '4');
+
+
+
+INSERT INTO заказ (Номер_заказа, Дата_заказа, Сумма_заказа, Менеджер_id_Менеджера, Кондитерские_изделия_id_Кондитерских_изделий, Клиент_id_Клиента, Меню_id_Меню)
+VALUES 
+('1', '2023-01-05', '1000', '1' ,  '1' ,  '1' , '1' ), 
+('2', '2022-11-23', '1000',  '2' ,  '2' ,  '2', '2' ),
+('3', '2022-11-25', '700',   '3' ,  '3' ,  '3' , '3'),
+('4', '2022-11-25', '1000',   '4' ,  '4' ,  '4' , '4' );
+
+
+
+INSERT INTO кондитерские_изделия (id_Кондитерских_изделий, Основа, Начинка, Название_изделия, Срок_годности, Кондитер_id_Кондитера, Кондитер_Кондитерская_id_Кондитерской )
+VALUES 
+('1', 'Тесто', 'Клубничное варенье', 'Клубничная булочка', '5 дней' ,  '1' ,  '1'), 
+('2', 'Диетическое тесто', 'Творог', 'Диетическая булочка с творогом',  '5 дней' ,  '2' ,  '2'),
+('3', 'Коржи', 'Сахарный яичный крем', 'Бисквитный торт',  '10 дней' ,  '3' ,  '3'),
+('4', 'Тесто', 'Шоколад', 'Шоколоданый эклер' ,  '7 дней' ,  '4' ,  '4'),
+('5', 'Тесто', 'Нет', 'Вафли',  '5 дней', '5' ,  '5');
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT Nachinka FROM Кондитерские_изделия;
+
+
+SELECT * FROM заказ WHERE Дата_заказа LIKE '2023-__-__';
+
+
+SELECT * FROM заказ WHERE Сумма_заказа LIKE '1000';
+
+
+SELECT * FROM Кондитерские_изделия WHERE Основа LIKE 'Тесто';
+
+
+SELECT * FROM Menu WHERE Время_приготовления BETWEEN '00:20:00' AND '01:30:00';
+
+-----------------------------------------------------------------------------------------------------------------
+
+DROP PROCEDURE IF EXISTS proc;
+
+delimiter $$
+CREATE PROCEDURE proc()
+BEGIN 
+SELECT count(ФИО_Клиента) 
+FROM клиент;
+
+END $$
+delimiter ;
+
+CALL proc();
+
+
+DROP FUNCTION IF EXISTS check_date;
+delimiter $$
+CREATE FUNCTION check_date(c VARCHAR(11))
+RETURNS CHAR(10)
+DETERMINISTIC
+BEGIN
+DECLARE k VARCHAR(11);
+IF k LIKE '7%' THEN
+RETURN 'RUS';
+ELSE IF k LIKE '7%' THEN
+RETURN 'RUS';
+ELSE RETURN 'OTHER';
+END IF; END IF;
+END$$
+delimiter ;
+SELECT check_date('79858705570');
